@@ -1,0 +1,6 @@
+GET /Contact/ HTTP/1.1
+Host: samplebunny.at
+User-Agent: Mozilla/5.0
+Accept-Language: de-de
+Accept-Encoding: gzip, deflate
+Connection: Keep-Alive
