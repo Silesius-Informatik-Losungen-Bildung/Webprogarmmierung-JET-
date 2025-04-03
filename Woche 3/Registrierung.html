@@ -1,0 +1,37 @@
+﻿<html>
+<head>
+    <title>Benutzer-Registrierung</title>
+    <script type="text/javascript">
+        function suche() {
+            var name = document.getElementById("txtName").value;
+            document.location = "http://localhost:5144/api/benutzer/" + name;
+        }
+    </script>
+</head>
+<body bgcolor="lightblue">
+    <h1>Benutzer-Registrierung</h1>
+    <form action="http://localhost:5144/api/benutzer/registrieren" method="post">
+        <table>
+            <tr>
+                <td>Vorname:</td>
+                <td><input type="text" name="Vorname"></td>
+            </tr>
+            <tr>
+                <td>Nachname:</td>
+                <td><input type="text" name="Nachname"></td>
+            </tr>
+            <tr>
+                <td>Alter:</td>
+                <td><input type="number" name="Alter"></td>
+            </tr>
+            <tr>
+                <td colspan="2 " align="center"> <button type="submit">Registrieren</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <div>Suchen nach:</div>
+    <div><input type="text" id="txtName"> <button onclick="suche()">Los</button><br /><br /></div>
+    <a href="http://localhost:5144/api/benutzer/liste">Alle anzeigen</a>
+</body>
+</html>
