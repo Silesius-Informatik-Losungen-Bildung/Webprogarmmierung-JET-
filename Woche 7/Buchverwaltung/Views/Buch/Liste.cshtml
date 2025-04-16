@@ -1,0 +1,100 @@
+﻿@model List<Buchverwaltung.Models.Buch>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Bücherliste</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #eef2f3;
+			padding: 2em;
+		}
+
+		h2 {
+			text-align: center;
+			color: #2c3e50;
+			margin-bottom: 1.5em;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+			border-radius: 6px;
+			overflow: hidden;
+		}
+
+		th, td {
+			padding: 0.8em 1em;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #007b5e;
+			color: white;
+		}
+
+		tr:hover {
+			background-color: #f1f1f1;
+		}
+
+		.aktionen {
+			margin-top: 2em;
+			text-align: right;
+		}
+
+			.aktionen a {
+				background-color: #28a745;
+				color: white;
+				text-decoration: none;
+				padding: 0.6em 1.2em;
+				border-radius: 4px;
+				font-size: 1em;
+				transition: background-color 0.3s ease;
+			}
+
+				.aktionen a:hover {
+					background-color: #218838;
+				}
+	</style>
+
+	<script>
+		setInterval(function(){
+			location.reload();
+		}, 3000);
+	</script>
+</head>
+<body>
+	<h2>📚 Bücherliste</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Titel</th>
+				<th>Autor</th>
+				<th>Erscheinungsjahr</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var buch in Model)
+			{
+				<tr>
+					<td>@buch.Id</td>
+					<td>@buch.Titel</td>
+					<td>@buch.Autor</td>
+					<td>@buch.Erscheinungsjahr</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<div class="aktionen">
+		<a asp-action="Erfassen" asp-controller="Buch">➕ Neues Buch erfassen</a>
+	</div>
+</body>
+</html>
