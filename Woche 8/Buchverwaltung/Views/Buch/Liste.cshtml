@@ -1,0 +1,157 @@
+﻿@using Buchverwaltung.Data
+@model List<Buchverwaltung.Models.Buch>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Bücherliste</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #eef2f3;
+			padding: 2em;
+		}
+
+		h2 {
+			text-align: center;
+			color: #2c3e50;
+			margin-bottom: 1.5em;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+			border-radius: 6px;
+			overflow: hidden;
+		}
+
+		th, td {
+			padding: 0.8em 1em;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #007b5e;
+			color: white;
+		}
+
+		tr:hover {
+			background-color: #f1f1f1;
+		}
+
+		.aktionen {
+			margin-top: 2em;
+			text-align: right;
+		}
+
+			.aktionen a {
+				background-color: #28a745;
+				color: white;
+				text-decoration: none;
+				padding: 0.6em 1.2em;
+				border-radius: 4px;
+				font-size: 1em;
+				transition: background-color 0.3s ease;
+			}
+
+				.aktionen a:hover {
+					background-color: #218838;
+				}
+
+		.buch-aktionen a {
+			display: inline-block;
+			margin-right: 0.5em;
+		}
+
+		.buch-aktionen button {
+			background-color: #dc3545;
+			color: white;
+			border: none;
+			padding: 0.4em 0.8em;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 0.9em;
+		}
+
+			.buch-aktionen button:hover {
+				background-color: #c82333;
+			}
+
+		.buch-aktionen a {
+			background-color: #ffc107;
+			color: black;
+			padding: 0.4em 0.8em;
+			border-radius: 4px;
+			font-size: 0.9em;
+			text-decoration: none;
+		}
+
+			.buch-aktionen a:hover {
+				background-color: #e0a800;
+			}
+	</style>
+
+	<script>
+		setInterval(function(){
+		location.reload();
+		}, 3000);
+
+
+		function deleteClick(url)
+		{
+			if(confirm('Sind Sie sicher, dass Sie dieses Buch löschen möchten?')){
+				location = url + "?guid=@Guid.NewGuid().ToString()";
+			}
+		}
+
+		function deleteAll(){
+			return confirm('Sind Sie sicher, dass Sie alle Bücher löschen möchten?');
+		}
+	</script>
+</head>
+<body>
+	<h2>📚 Bücherliste</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Titel</th>
+				<th>Autor</th>
+				<th>Erscheinungsjahr</th>
+				<th>Aktionen</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var buch in Model)
+			{
+				<tr>
+					<td>@buch.Id</td>
+					<td>@buch.Titel</td>
+					<td>@buch.Autor</td>
+					<td>@buch.Erscheinungsjahr</td>
+					<td class="buch-aktionen">
+						<a asp-action="Bearbeiten" asp-route-id="@buch.Id">✏️ Bearbeiten</a>
+						<button type="submit" onclick="deleteClick('@Url.Action("Loeschen", new { @buch.Id })')">🗑️ Löschen</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<div class="aktionen">
+		<a asp-action="Erfassen" asp-controller="Buch">➕ Neues Buch erfassen</a>
+	</div>
+
+	@if (BuchData.Buecher.Count > 0)
+	{
+		<div class="buch-aktionen">
+			<a asp-action="AlleLoeschen" onclick="return deleteAll();" asp-controller="Buch">🗑️ Alle Löschen</a>
+		</div>
+	}
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿@model Buchverwaltung.Models.Buch
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Buch erfassen</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #eef2f3;
+			padding: 2em;
+		}
+
+		.formular-container {
+			max-width: 500px;
+			margin: 0 auto;
+			padding: 1.5em;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+		}
+
+		h2 {
+			text-align: center;
+			color: #2c3e50;
+			margin-bottom: 1.2em;
+		}
+
+		.form-gruppe {
+			margin-bottom: 1em;
+		}
+
+			.form-gruppe label {
+				display: block;
+				margin-bottom: 0.3em;
+				font-weight: bold;
+			}
+
+			.form-gruppe input {
+				width: 100%;
+				padding: 0.5em;
+				font-size: 1em;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+
+			.form-gruppe span {
+				color: darkred;
+				font-size: 0.9em;
+			}
+
+		.formular-buttons {
+			text-align: right;
+			margin-top: 1.5em;
+		}
+
+			.formular-buttons button {
+				background-color: #007b5e;
+				color: white;
+				border: none;
+				padding: 0.6em 1.2em;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 1em;
+			}
+
+				.formular-buttons button:hover {
+					background-color: #005f47;
+				}
+	</style>
+</head>
+<body>
+	<div class="formular-container">
+		@if (Model == null)
+		{
+			<h2>📘 Buch erfassen</h2>
+		}
+		else
+		{
+			<h2>📘 Buch @Model.Id aktualisieren</h2>
+		}
+
+		<form asp-action="Erfassen" asp-controller="Buch" method="post">
+			<div class="form-gruppe">
+				<input asp-for="Id" type="hidden" />
+				<label asp-for="Titel"></label>
+				<input asp-for="Titel" />
+				<span asp-validation-for="Titel"></span>
+			</div>
+			<div class="form-gruppe">
+				<label asp-for="Autor"></label>
+				<input asp-for="Autor" />
+				<span asp-validation-for="Autor"></span>
+			</div>
+			<div class="form-gruppe">
+				<label asp-for="Erscheinungsjahr"></label>
+				<input asp-for="Erscheinungsjahr" type="number" />
+				<span asp-validation-for="Erscheinungsjahr"></span>
+			</div>
+
+			<div class="formular-buttons">
+				<button type="submit">💾 Speichern</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
