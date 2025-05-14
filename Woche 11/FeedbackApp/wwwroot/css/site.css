@@ -1,0 +1,8 @@
+input, textarea {
+  width: 300px;
+}
+
+textarea {
+    height: 200px;
+}
+
