@@ -1,0 +1,25 @@
+﻿POST /api/buecher  HTTP/1.1
+Host: localhost:5216
+Accept: application/json
+Content-Type: application/json
+
+{
+    "Titel": "C# für Einsteiger",
+    "ISBN": "AB23HK",
+    "Autor": "Max Müller",
+    "Erscheinungsjahr": 2025
+}
+
+
+
+GET /api/buecher/1/  HTTP/1.1
+Host: localhost:5216
+Accept: application/json
+Content-Type: application/json
+
+GET /api/buecher/ HTTP/1.1
+Host: localhost:5216
+Accept: application/json
+Content-Type: application/json
+
+
