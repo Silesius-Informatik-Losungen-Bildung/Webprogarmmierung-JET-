@@ -1,0 +1,7 @@
+FeedbackApp von Woche 11 aufmnachen
+FeedbackApp genau durchgehen und dabei
+	Validierung usw. erklären (Doku ist dabei)
+
+FeedbackApp von Woche 12 aufmnachen
+Erweiterungen (neue Felder) in FeedbackApp erklären und dabei
+	@section und ViewBag und ViewData in ASP.NET Core MVC vortragen
