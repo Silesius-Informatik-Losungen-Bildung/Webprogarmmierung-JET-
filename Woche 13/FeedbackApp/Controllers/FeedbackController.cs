@@ -45,7 +45,7 @@ public class FeedbackController : Controller
         ViewData["Title"] = "Danke";
 
         var bgColor = HttpContext.Request.Cookies["bgColor"];
-        if (bgColor == "white" || string.IsNullOrEmpty(bgColor)) ;
+        if (bgColor != "gold") ;
             HttpContext.Response.Cookies.Append("bgColor", "gold");
 
         return View();
