@@ -1,0 +1,5 @@
+POST http://localhost:5217/Benutzer/Registrieren/ HTTP/1.1
+Host: localhost:5217
+Content-Type: application/x-www-form-urlencoded
+
+Vorname=Max&Nachname=Mustermann&Alter=33
