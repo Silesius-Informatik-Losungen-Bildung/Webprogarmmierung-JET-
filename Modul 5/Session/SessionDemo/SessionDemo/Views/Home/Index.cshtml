@@ -1,0 +1,13 @@
+﻿@model string
+
+<h2>Session-Demo</h2>
+
+<p><strong>Aktueller Session-Wert:</strong> <span style="color:red">@(Model ?? "(nicht gesetzt)")</span> </p>
+
+<form asp-action="Speichern" method="post">
+	<label>Neuer Name:</label>
+	<input type="text" name="name" />
+	<button type="submit">Speichern</button>
+</form>
+
+<button type="button" onclick="location='@Url.ActionLink("Loeschen")'">Session-Wert löschen</button>
