@@ -1,0 +1,21 @@
+﻿
+<span>Einzeln</span>
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Hochladen">
+	<input type="file" name="datei" formenctype="multipart/form-data" accept="image/png, image/jpeg" />
+	<button type="submit">Hochladen</button>
+</form>
+
+<span>Multi</span>
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="MultiHochladen">
+	<input type="file" name="dateien" formenctype="multipart/form-data" accept="image/png, image/jpeg" multiple />
+	<button type="submit">Hochladen</button>
+</form>
+
+@foreach (var datei in Directory.GetFiles("wwwroot/uploads"))
+{
+	var bild = datei.Replace("wwwroot", "").Replace("\\", "/").ToLower();
+	if (bild.EndsWith(".jpg") || bild.EndsWith(".png") || bild.EndsWith(".jpeg") || bild.EndsWith(".gif") || bild.EndsWith(".webp"))
+	{
+		<img src="@bild" style="max-width:100px;cursor:pointer" title="@bild" onclick="window.open('@bild', 'bildgross', 'popup')" />
+	}
+}
