@@ -1,0 +1,26 @@
+﻿
+<div>Bild Direkter Abruf (ohne HttpHandler)</div>
+<img src="~/media/Studie.jpg" style="max-width:300px" />
+<br />
+<br />
+<div>Bild Dynamischer Abruf (mit HttpHandler)</div>
+<img src="@Url.Action("Image", "Documents", new {id = 0})" style="max-width:300px" />
+<br />
+<br />
+<div>Dokumnet Download (ohne HttpHandler)</div>
+<a href="~/media/Erste Schritte mit OneDrive.pdf" target="_blank">Download Dokument</a>
+<br />
+<br />
+<div>Dokumnet Download (mit HttpHandler)</div>
+<a href="@Url.Action("Doc", "Documents", new {id = 0})">Download Dokument</a>
+<br />
+<br />
+<div>Video Direkter Abruf (ohne HttpHandler)</div>
+<video width="640" height="360" controls>
+	<source src="~/media/Erde.mp4" type="video/mp4">
+</video>
+<div>Direkter Abruf (mit HttpHandler)</div>
+<video width="640" height="360" controls>
+	<source src="@Url.Action("Mp4", "Documents", new {id = 0})" type="video/mp4">
+</video>
+
