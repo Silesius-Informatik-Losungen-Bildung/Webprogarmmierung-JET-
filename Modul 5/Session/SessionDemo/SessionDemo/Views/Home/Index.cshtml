@@ -1,12 +1,19 @@
-﻿@model string
+﻿@model IndexViewModel
 
 <h2>Session-Demo</h2>
 
-<p><strong>Aktueller Session-Wert:</strong> <span style="color:red">@(Model ?? "(nicht gesetzt)")</span> </p>
+<p><strong>Aktueller Session-Wert:</strong> <span style="color:red">@(Model.Name)</span> </p>
 
 <form asp-action="Speichern" method="post">
 	<label>Neuer Name:</label>
-	<input type="text" name="name" />
+	<input asp-for="Name" type="text" />
+	<select asp-for="Colors">
+			<option>White</option>
+			<option>Red</option>
+			<option>Green</option>
+			<option>Blue</option>
+		
+	</select>
 	<button type="submit">Speichern</button>
 </form>
 

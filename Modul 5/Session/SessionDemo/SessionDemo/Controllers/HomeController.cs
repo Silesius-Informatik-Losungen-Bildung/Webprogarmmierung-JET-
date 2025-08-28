@@ -6,7 +6,8 @@ namespace SessionDemo.Controllers
 {
     public class HomeController : Controller
     {
-        private const string KeyName = "Benutzername";
+        private const string KeyNameBenutzername = "Benutzername";
+        private const string KeyNameColors = "Colors";
 
         private readonly ILogger<HomeController> _logger;
 
@@ -17,25 +18,38 @@ namespace SessionDemo.Controllers
 
         public IActionResult Index()
         {
-            var name = HttpContext.Session.GetString(KeyName);
-            return View("Index", name);
+            var model = new IndexViewModel
+            {
+                Name = HttpContext.Session.GetString(KeyNameBenutzername) ?? string.Empty,
+                Colors = HttpContext.Session.GetString(KeyNameColors) ?? "white"
+            };
+            return View(model);
         }
 
-        public IActionResult Speichern(string? name)
+        public IActionResult Speichern(IndexViewModel viewModel)
         {
-            if (name != null)
-                HttpContext.Session.SetString(KeyName, name);
+            if (viewModel.Name != null)
+                HttpContext.Session.SetString(KeyNameBenutzername, viewModel.Name);
+            if (viewModel.Colors != null)
+                HttpContext.Session.SetString(KeyNameColors, viewModel.Colors);
             return RedirectToAction("Index");
         }
         public IActionResult Loeschen()
         {
-            HttpContext.Session.Remove(KeyName);
+            HttpContext.Session.Remove(KeyNameBenutzername);
+            HttpContext.Session.Remove(KeyNameColors);
+
             return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            var model = new IndexViewModel
+            {
+                Name = HttpContext.Session.GetString(KeyNameBenutzername) ?? string.Empty,
+                Colors = HttpContext.Session.GetString(KeyNameColors) ?? "white"
+            };
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

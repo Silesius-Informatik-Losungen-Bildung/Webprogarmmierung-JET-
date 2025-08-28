@@ -1,0 +1,8 @@
+@model IEnumerable<ViewComponentDemo.Models.Artikel>
+
+<ul>
+@foreach (var artikel in Model)
+{
+    <li>@artikel.Titel (@artikel.ErstelltAm.ToShortDateString())</li>
+}
+</ul>
