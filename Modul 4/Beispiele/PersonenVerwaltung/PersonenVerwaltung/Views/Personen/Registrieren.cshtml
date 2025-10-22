@@ -1,0 +1,23 @@
+﻿@using PersonenVerwaltung.Models
+@model Person
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Benutzer-Registrierung</title>
+</head>
+<body>
+    <form method="post" action="/Personen/Registrieren">
+        <label for="Vorname">Vorname</label>
+        <input type="text" value="@Model.Vorname" name="Vorname" id="Vorname" />
+        <br />
+        <label for="Nachname">Nachname</label>
+        <input type="text" name="Nachname" id="Nachname" value="@Model.Nachname" />
+        <br />
+        <label for="Alter">Alter</label>
+        <input type="number" name="Alter" id="Alter" value="@Model.Alter" />
+        <br />
+        <input type="submit" value="Absenden" />
+    </form>
+</body>
+</html>
