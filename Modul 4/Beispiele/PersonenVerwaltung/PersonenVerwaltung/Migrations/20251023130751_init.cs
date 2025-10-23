@@ -5,13 +5,13 @@
 namespace PersonenVerwaltung.Migrations
 {
     /// <inheritdoc />
-    public partial class initAaa : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Standort",
+                name: "Standorte",
                 columns: table => new
                 {
                     StandortId = table.Column<int>(type: "int", nullable: false)
@@ -20,7 +20,7 @@ namespace PersonenVerwaltung.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Standort", x => x.StandortId);
+                    table.PrimaryKey("PK_Standorte", x => x.StandortId);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,9 +38,9 @@ namespace PersonenVerwaltung.Migrations
                 {
                     table.PrimaryKey("PK_Personen", x => x.PersonId);
                     table.ForeignKey(
-                        name: "FK_Personen_Standort_StandortId",
+                        name: "FK_Personen_Standorte_StandortId",
                         column: x => x.StandortId,
-                        principalTable: "Standort",
+                        principalTable: "Standorte",
                         principalColumn: "StandortId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -58,7 +58,7 @@ namespace PersonenVerwaltung.Migrations
                 name: "Personen");
 
             migrationBuilder.DropTable(
-                name: "Standort");
+                name: "Standorte");
         }
     }
 }

@@ -66,7 +66,7 @@ namespace PersonenVerwaltung.Migrations
 
                     b.HasKey("StandortId");
 
-                    b.ToTable("Standort");
+                    b.ToTable("Standorte");
                 });
 
             modelBuilder.Entity("PersonenVerwaltung.Models.Person", b =>

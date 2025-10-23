@@ -11,8 +11,8 @@ using PersonenVerwaltung.Data;
 namespace PersonenVerwaltung.Migrations
 {
     [DbContext(typeof(PersonenDbContext))]
-    [Migration("20251022140914_initAaa")]
-    partial class initAaa
+    [Migration("20251023130751_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace PersonenVerwaltung.Migrations
 
                     b.HasKey("StandortId");
 
-                    b.ToTable("Standort");
+                    b.ToTable("Standorte");
                 });
 
             modelBuilder.Entity("PersonenVerwaltung.Models.Person", b =>
