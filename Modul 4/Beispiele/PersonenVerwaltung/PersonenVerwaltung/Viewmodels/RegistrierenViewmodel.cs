@@ -1,18 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PersonenVerwaltung.Models
+namespace PersonenVerwaltung.Viewmodels
 {
-    public class Person
+    public class RegistrierenViewmodel
     {
-        public int PersonId { get; set; }
         [MaxLength(20)]
         public string Vorname { get; set; } = null!;
         [MaxLength(20)]
         public string Nachname { get; set; } = null!;
-        public int? Alter {  get; set; }
-
+        public int? Alter { get; set; }
         public int StandortId { get; set; }
-
-        public Standort Standort { get; set; } = null!;
     }
 }

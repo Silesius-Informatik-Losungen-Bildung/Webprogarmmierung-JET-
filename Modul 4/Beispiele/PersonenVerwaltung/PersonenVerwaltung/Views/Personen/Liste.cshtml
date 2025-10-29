@@ -1,0 +1,22 @@
+﻿@using PersonenVerwaltung.Viewmodels
+@model PersonenListeViewmodel
+
+<table>
+	<tr>
+		<th>Id</th>
+		<th>Vor- Nachname</th>
+		<th>Standort</th>
+		<th>Aktualisieren</th>
+		<th>Löschen</th>
+	</tr>
+	@foreach (var person in Model.Items)
+	{
+		<tr>
+			<td>@person.PersonId</td>
+			<td>@person.VornameNachname</td>
+			<td>@person.Standort</td>
+			<td><a href="#">Aktualiseren</a></td>
+			<td><a href="#">Löschen</a></td>
+		</tr>
+	}
+</table>

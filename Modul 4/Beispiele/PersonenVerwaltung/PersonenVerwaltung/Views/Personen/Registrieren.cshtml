@@ -1,23 +1,29 @@
-﻿@using PersonenVerwaltung.Models
-@model Person
+﻿@using PersonenVerwaltung.Viewmodels
+@model RegistrierenViewmodel
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Benutzer-Registrierung</title>
+	<title>Benutzer-Registrierung</title>
 </head>
 <body>
-    <form method="post" action="/Personen/Registrieren">
-        <label for="Vorname">Vorname</label>
-        <input type="text" value="@Model.Vorname" name="Vorname" id="Vorname" />
-        <br />
-        <label for="Nachname">Nachname</label>
-        <input type="text" name="Nachname" id="Nachname" value="@Model.Nachname" />
-        <br />
-        <label for="Alter">Alter</label>
-        <input type="number" name="Alter" id="Alter" value="@Model.Alter" />
-        <br />
-        <input type="submit" value="Absenden" />
-    </form>
+	<form method="post" action="/Personen/Registrieren">
+		<label for="Vorname">Vorname</label>
+		<input type="text" value="@Model.Vorname" name="Vorname" id="Vorname" />
+		<br />
+		<label for="Nachname">Nachname</label>
+		<input type="text" name="Nachname" id="Nachname" value="@Model.Nachname" />
+		<br />
+		<label for="Alter">Alter</label>
+		<input type="number" name="Alter" id="Alter" value="@Model.Alter" />
+		<br />
+		<select name="StandortId" id="StandortId">
+			<option>Bitte auswählen</option>
+			<option value="1">Wien</option>
+			<option value="2">Sankt Pölten</option>
+			<option value="3">Zwettl</option>
+		</select>
+		<input type="submit" value="Absenden" />
+	</form>
 </body>
 </html>
