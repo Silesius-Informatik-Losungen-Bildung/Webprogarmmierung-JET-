@@ -1,12 +1,13 @@
-﻿@using PersonenVerwaltung.Viewmodels
-@model RegistrierenViewmodel
+﻿@model RegistrierenViewmodel
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Benutzer-Registrierung</title>
+	<title>Personen-Registrierung</title>
 </head>
 <body>
+	<h2>@ViewData["Seitentitel"]</h2>
+	@* 
 	<form method="post" action="/Personen/Registrieren">
 		<label for="Vorname">Vorname</label>
 		<input type="text" value="@Model.Vorname" name="Vorname" id="Vorname" />
@@ -23,6 +24,31 @@
 			<option value="2">Sankt Pölten</option>
 			<option value="3">Zwettl</option>
 		</select>
+		<input type="submit" value="Absenden" />
+	</form>
+ *@
+
+	<form method="post" asp-controller="Personen" asp-action="Registrieren">
+		<div>
+			<label asp-for="Vorname"></label>
+			<input asp-for="Vorname" />
+			<span asp-validation-for="Vorname"></span>
+		</div>
+		<div>
+			<label asp-for="Nachname"></label>
+			<input asp-for="Nachname" />
+			<span asp-validation-for="Nachname"></span>
+		</div>
+		<div>
+			<label asp-for="Alter"></label>
+			<input asp-for="Alter" />
+			<span asp-validation-for="Alter"></span>
+		</div>
+		<div>
+			<label asp-for="StandortId"></label>
+			<select asp-for="StandortId" asp-items="Model.StandortListe"></select>
+			<span asp-validation-for="StandortId"></span>
+		</div>
 		<input type="submit" value="Absenden" />
 	</form>
 </body>

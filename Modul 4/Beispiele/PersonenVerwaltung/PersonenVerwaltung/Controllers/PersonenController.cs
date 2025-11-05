@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PersonenVerwaltung.Data;
 using PersonenVerwaltung.Models;
@@ -12,7 +13,8 @@ namespace PersonenVerwaltung.Controllers
         [HttpGet]
         public IActionResult Registrieren()
         {
-            return View(new RegistrierenViewmodel());
+            ViewData["Seitentitel"] = "Neue Person im System registrieren." + DateTime.Now.ToString();
+            return View(GetRegistrierenViewmodel());
         }
 
 
@@ -42,7 +44,7 @@ namespace PersonenVerwaltung.Controllers
         public IActionResult Registrieren(RegistrierenViewmodel registrierenViewmodel)
         {
             if (!ModelState.IsValid)
-                return View(registrierenViewmodel);
+                return View(GetRegistrierenViewmodel(registrierenViewmodel));
 
             var person = new Person()
             {
@@ -79,5 +81,25 @@ namespace PersonenVerwaltung.Controllers
 
             return View(detailsViewmodel);
         }
+
+        private RegistrierenViewmodel GetRegistrierenViewmodel(RegistrierenViewmodel? registrierenViewmodel = null)
+        {
+            if (registrierenViewmodel == null)
+                registrierenViewmodel = new RegistrierenViewmodel();
+
+            using PersonenDbContext personenDbContext = new PersonenDbContext();
+            List<SelectListItem> standortListe = personenDbContext.Standorte
+                .Select(st => new SelectListItem
+                {
+                    Value = st.StandortId.ToString(),
+                    Text = st.Name,
+                }
+                ).ToList();
+
+            standortListe.Insert(0, new SelectListItem() { Value = "", Text = "Bitte auswählen" });
+            registrierenViewmodel.StandortListe = standortListe;
+            return registrierenViewmodel;
+        }
+
     }
 }
