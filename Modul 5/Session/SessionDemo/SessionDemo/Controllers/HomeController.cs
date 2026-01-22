@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SessionDemo.Models;
 
@@ -6,9 +7,6 @@ namespace SessionDemo.Controllers
 {
     public class HomeController : Controller
     {
-        private const string KeyNameBenutzername = "Benutzername";
-        private const string KeyNameColors = "Colors";
-
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -18,38 +16,43 @@ namespace SessionDemo.Controllers
 
         public IActionResult Index()
         {
-            var model = new IndexViewModel
+            var viewmodel = new IndexViewModel()
             {
-                Name = HttpContext.Session.GetString(KeyNameBenutzername) ?? string.Empty,
-                Colors = HttpContext.Session.GetString(KeyNameColors) ?? "white"
-            };
-            return View(model);
+                Name = HttpContext.Session.GetString("Name") ?? string.Empty,
+                Colors = HttpContext.Session.GetString("Colors") ?? "white"
+            };     
+            return View(viewmodel);
         }
 
+        [HttpPost]
         public IActionResult Speichern(IndexViewModel viewModel)
         {
+            // In Session speichern
             if (viewModel.Name != null)
-                HttpContext.Session.SetString(KeyNameBenutzername, viewModel.Name);
+                HttpContext.Session.SetString("Name", viewModel.Name);
+            
             if (viewModel.Colors != null)
-                HttpContext.Session.SetString(KeyNameColors, viewModel.Colors);
+                HttpContext.Session.SetString("Colors", viewModel.Colors);
+
             return RedirectToAction("Index");
         }
+
         public IActionResult Loeschen()
         {
-            HttpContext.Session.Remove(KeyNameBenutzername);
-            HttpContext.Session.Remove(KeyNameColors);
-
+            HttpContext.Session.Remove("Name");
+            HttpContext.Session.Remove("Colors");
             return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
         {
-            var model = new IndexViewModel
+            var viewmodel = new BasisViewModel()
             {
-                Name = HttpContext.Session.GetString(KeyNameBenutzername) ?? string.Empty,
-                Colors = HttpContext.Session.GetString(KeyNameColors) ?? "white"
+                Name = HttpContext.Session.GetString("Name") ?? string.Empty,
+                Colors = HttpContext.Session.GetString("Colors") ?? "white"
             };
-            return View(model);
+
+            return View(viewmodel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

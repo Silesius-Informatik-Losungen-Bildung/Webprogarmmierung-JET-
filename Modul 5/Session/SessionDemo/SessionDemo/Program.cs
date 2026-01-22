@@ -8,21 +8,18 @@ namespace SessionDemo
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            // @@ADD Session-Services aktivieren
+            
+            // Session-Services aktivieren
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(20); // Dauer der Session
-                // Setzt das HttpOnly-Flag für das Cookie,
-                // wodurch es nur vom Server aus zugänglich ist und nicht durch clientseitiges JavaScript.
-                // Dies erhöht die Sicherheit gegen XSS-Angriffe.
-                options.Cookie.HttpOnly = true;
                 // Markiert das Cookie als "essenziell",
                 // sodass es auch ohne ausdrückliche Zustimmung des Nutzers gesetzt wird
                 // (z.B. für DSGVO-konforme Cookie-Banner).
-                options.Cookie.IsEssential = true; 
+                options.Cookie.IsEssential = true;
             });
+
 
             var app = builder.Build();
 
@@ -35,7 +32,7 @@ namespace SessionDemo
 
             app.UseRouting();
 
-            app.UseSession(); // @@ADD Session aktivieren!
+            app.UseSession(); //Session aktivieren!
 
             app.UseAuthorization();
 

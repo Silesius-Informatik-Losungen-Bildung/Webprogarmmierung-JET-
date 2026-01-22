@@ -1,4 +1,4 @@
-﻿@model IndexViewModel
+﻿@model BasisViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SessionDemo.styles.css" asp-append-version="true" />
     <style>
-        html, body {
-            background-color: @Model.Colors;
+        body {
+            background-color: @Model.Colors
         }
     </style>
 </head>
@@ -38,13 +38,14 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <p><strong>Aktueller Session-Wert:</strong> <span style="color:red">@(Model.Name)</span> </p>
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - SessionDemo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - SessionDemo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

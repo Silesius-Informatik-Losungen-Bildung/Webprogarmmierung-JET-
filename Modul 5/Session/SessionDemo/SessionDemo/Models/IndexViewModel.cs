@@ -1,8 +1,7 @@
 ﻿namespace SessionDemo.Models
 {
-    public class IndexViewModel
+    public class IndexViewModel: BasisViewModel
     {
-        public string Colors { get; set; }
-        public string Name { get; set; }
+        
     }
 }
