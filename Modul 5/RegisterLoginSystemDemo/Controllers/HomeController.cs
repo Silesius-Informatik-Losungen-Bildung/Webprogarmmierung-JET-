@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RegisterLoginSystemDemo.Models;
 
@@ -18,6 +19,7 @@ namespace RegisterLoginSystemDemo.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
             return View();

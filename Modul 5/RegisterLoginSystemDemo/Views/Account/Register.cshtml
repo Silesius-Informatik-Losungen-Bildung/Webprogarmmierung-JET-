@@ -1,0 +1,10 @@
+﻿@model RegisterViewModel
+
+<h2>Registrieren</h2>
+<form asp-action="Register" method="post">
+    <input asp-for="Benutzername" placeholder="Benutzername" />
+    <input asp-for="Passwort" type="password" placeholder="Passwort" />
+    <input asp-for="Email" placeholder="Email" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <button type="submit">Registrieren</button>
+</form>

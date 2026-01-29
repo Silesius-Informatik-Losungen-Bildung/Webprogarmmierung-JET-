@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RegisterLoginSystemDemo.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using RegisterLoginSystemDemo.Models;
 using RegisterLoginSystemDemo.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
+using RegisterLoginSystemDemo.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace RegisterLoginSystemDemo.Controllers
 {
     public class AccountController : Controller
     {
-
-        private readonly RegisterLoginDbContext _context;
+        private readonly AppDbContext _context;
         private readonly IPasswordHasher<Benutzer> _hasher;
 
-        public AccountController(RegisterLoginDbContext context, IPasswordHasher<Benutzer> hasher)
+        public AccountController(AppDbContext context, IPasswordHasher<Benutzer> hasher)
         {
             _context = context;
             _hasher = hasher;
@@ -38,31 +35,30 @@ namespace RegisterLoginSystemDemo.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            var benutzer = await _context.Benutzer
-                .FirstOrDefaultAsync(b => b.Benutzername.ToLower() == model.Benutzername.ToLower()
-                || b.Email.ToLower() == model.Email.ToLower());
 
+            var benutzer = await _context.Benutzer
+                .FirstOrDefaultAsync(b =>b.Benutzername.ToLower() == model.Benutzername.Trim().ToLower()
+                || b.Email.ToLower() == model.Email.Trim().ToLower());
             if (benutzer != null)
             {
                 ModelState.AddModelError("", "Benutzername oder E-Mail bereits in Verwendung.");
                 return View(model);
             }
 
-            benutzer = new Benutzer()
+            benutzer = new Benutzer
             {
                 Benutzername = model.Benutzername,
                 Email = model.Email,
                 Rolle = "User"
             };
-
             benutzer.PasswortHash = _hasher.HashPassword(benutzer, model.Passwort);
-            
-            await _context.Benutzer.AddAsync(benutzer);
+
+
+            _context.Benutzer.Add(benutzer);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Login");
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -104,6 +100,10 @@ namespace RegisterLoginSystemDemo.Controllers
             await HttpContext.SignOutAsync("CookieAuth");
             return RedirectToAction("Login");
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
-

@@ -3,11 +3,11 @@ using RegisterLoginSystemDemo.Models;
 
 namespace RegisterLoginSystemDemo.Data
 {
-    public class RegisterLoginDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<Benutzer> Benutzer { get; set; }
-        public RegisterLoginDbContext(DbContextOptions<RegisterLoginDbContext> options):
-            base(options) { }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
