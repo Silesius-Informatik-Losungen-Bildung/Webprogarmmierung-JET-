@@ -1,0 +1,20 @@
+﻿@model TrsWebApp.Models.ContactInfo
+
+<h1>Kontakt bearbeiten</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ContactInfoId" />
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+    </div>
+
+    <button type="submit">Speichern</button>
+    <a asp-action="Index">Abbrechen</a>
+</form>

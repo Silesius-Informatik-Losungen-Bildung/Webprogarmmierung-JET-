@@ -1,0 +1,22 @@
+﻿@model TrsWebApp.Models.ContactInfo
+
+<h1>Kontakt löschen</h1>
+
+<h3>Sind Sie sicher, dass Sie diesen Kontakt löschen möchten?</h3>
+
+<dl>
+    <dt>ContactInfoId</dt>
+    <dd>@Model.ContactInfoId</dd>
+
+    <dt>Email</dt>
+    <dd>@Model.Email</dd>
+
+    <dt>Telefon</dt>
+    <dd>@Model.PhoneNumber</dd>
+</dl>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="ContactInfoId" />
+    <button type="submit">Löschen</button>
+    <a asp-action="Index">Abbrechen</a>
+</form>

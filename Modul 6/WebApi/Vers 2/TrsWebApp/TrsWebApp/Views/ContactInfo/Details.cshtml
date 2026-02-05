@@ -1,0 +1,17 @@
+﻿@model TrsWebApp.Models.ContactInfo
+
+<h1>Kontakt-Details</h1>
+
+<dl>
+    <dt>ID</dt>
+    <dd>@Model.ContactInfoId</dd>
+
+    <dt>Email</dt>
+    <dd>@Model.Email</dd>
+
+    <dt>Telefon</dt>
+    <dd>@Model.PhoneNumber</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.ContactInfoId">Bearbeiten</a>
+<a asp-action="Index">Zurück</a>

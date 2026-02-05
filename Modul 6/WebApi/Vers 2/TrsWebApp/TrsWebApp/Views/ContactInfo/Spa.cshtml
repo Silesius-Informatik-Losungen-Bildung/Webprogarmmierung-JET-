@@ -1,0 +1,126 @@
+﻿<h1>ContactInfo SPA</h1>
+
+<div>
+    <button id="loadBtn">Alle Kontakte laden</button>
+    <ul id="contactList"></ul>
+</div>
+
+<hr />
+
+<h3>Neuen Kontakt anlegen</h3>
+<form id="createForm">
+    <input type="email" id="email" placeholder="Email" />
+    <input type="text" id="phoneNumber" placeholder="PhoneNumber" />
+    <button type="submit">Speichern</button>
+</form>
+
+<hr />
+
+<h3>Kontakt bearbeiten</h3>
+<form id="editForm" style="display:none;">
+    <input type="hidden" id="editId" />
+    <input type="email" id="editEmail" placeholder="Email" />
+    <input type="text" id="editPhoneNumber" placeholder="PhoneNumber" />
+    <button type="submit">Änderungen speichern</button>
+    <button type="button" id="cancelEdit">Abbrechen</button>
+</form>
+
+<hr />
+
+<h3>Details</h3>
+<div id="detailsBox" style="display:none;"></div>
+
+<script>
+    const apiUrl = "/api/ContactInfoApi";
+
+    // Event-Listener setzen
+    document.getElementById("loadBtn").addEventListener("click", async () => {
+        await load();
+    });
+
+    document.getElementById("createForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const contact = {
+            email: document.getElementById("email").value,
+            phoneNumber: document.getElementById("phoneNumber").value
+        };
+        await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(contact)
+        });
+
+        e.target.reset();
+        await load();
+    });
+
+    document.getElementById("editForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("editId").value;
+        const contact = {
+            contactInfoId: id,
+            email: document.getElementById("editEmail").value,
+            phoneNumber: document.getElementById("editPhoneNumber").value
+        };
+        await fetch(`${apiUrl}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(contact)
+        });
+
+        e.target.reset();
+        document.getElementById("editForm").style.display = "none";
+        await load();
+    });
+
+    document.getElementById("cancelEdit").addEventListener("click", () => {
+        document.getElementById("editForm").reset();
+        document.getElementById("editForm").style.display = "none";
+    });
+
+
+    // Funktionen
+    async function deleteContact(contactInfoId) {
+        if (!confirm("Wirklich löschen?")) return;
+        await fetch(`${apiUrl}/${contactInfoId}`, { method: "DELETE" });
+        await load();
+    }
+
+    async function editContact(contactInfoId) {
+        const res = await fetch(`${apiUrl}/${contactInfoId}`);
+        const contact = await res.json();
+
+        document.getElementById("editId").value = contact.contactInfoId;
+        document.getElementById("editEmail").value = contact.email;
+        document.getElementById("editPhoneNumber").value = contact.phoneNumber;
+
+        document.getElementById("editForm").style.display = "block";
+        document.getElementById("detailsBox").style.display = "none";
+    }
+
+    async function showDetails(contactInfoId) {
+        const res = await fetch(`${apiUrl}/${contactInfoId}`);
+        const c = await res.json();
+        const box = document.getElementById("detailsBox");
+        box.style.display = "block";
+        box.innerHTML = `
+            <p><b>ID:</b> ${c.contactInfoId}</p>
+            <p><b>Email:</b> ${c.email}</p>
+            <p><b>Telefon:</b> ${c.phoneNumber}</p>`;
+    }
+
+    async function load() {
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        const list = document.getElementById("contactList");
+        list.innerHTML = "";
+        data.forEach(c => {
+            const li = document.createElement("li");
+            li.innerHTML = `${c.contactInfoId} (${c.email}, ${c.phoneNumber})
+                <button onclick="showDetails(${c.contactInfoId})">Details</button>
+                <button onclick="editContact(${c.contactInfoId})">Bearbeiten</button>
+                <button onclick="deleteContact(${c.contactInfoId})">Löschen</button>`;
+            list.appendChild(li);
+        });
+    }
+</script>
