@@ -1,0 +1,31 @@
+﻿@using Ap12Web.Models
+@model Produkt
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Produkt erfassen</title>
+</head>
+<body>
+	<form method="post" action="/Produkt/Speichern">
+		<div>
+			<label for="Bezeichnung">Bezeichnung</label>
+			<input type="text" name="Bezeichnung" id="Bezeichnung" value="@Model.Bezeichnung" />
+		</div>
+		<div>
+			<label for="Preis">Preis</label>
+			<input type="number" name="Preis" id="Preis" value="@Model.Preis">
+		</div>
+
+		<div>
+			<label for="Hersteller">Hersteller</label>
+			<select name="Hersteller" id="Hersteller">
+				@* <option selected="@(string.IsNullOrEmpty(Model.Hersteller))">Bitte auswählen</option>
+				<option selected="@(Model.Hersteller == "AlpenGold Lebensmittel GmbH")">AlpenGold Lebensmittel GmbH</option>
+				<option selected="@(Model.Hersteller == "Wiener Genussmanufaktur")">Wiener Genussmanufaktur</option>
+				<option selected="@(Model.Hersteller == "Steirische Naturkost KG")">Steirische Naturkost KG</option> *@
+			</select>
+		</div>
+		<input type="submit" value="Senden" />
+	</form>
+</body>
+</html>

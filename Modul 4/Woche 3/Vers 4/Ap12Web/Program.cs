@@ -11,8 +11,7 @@ namespace Ap12Web
             app.UseRouting();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Produkt}/{action=Erfassen}");
-
+                pattern: "{controller=Produkt}/{action=Liste}");
 
             app.Run();
         }

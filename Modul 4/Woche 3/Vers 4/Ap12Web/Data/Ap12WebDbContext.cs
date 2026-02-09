@@ -9,7 +9,7 @@ namespace Ap12Web.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Ap12Web;Data Source=DESKTOP-KCGE85K\\SQLEXPRESS;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Ap12Web;Data Source=localhost\\SQLEXPRESS;TrustServerCertificate=true");
         }
     }
 }
