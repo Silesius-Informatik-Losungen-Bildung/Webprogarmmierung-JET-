@@ -1,0 +1,30 @@
+@model ProductListViewModel
+
+<form asp-action="Index" method="get">
+
+	<input asp-for="Search" placeholder="Suche..." />
+
+	<select asp-for="Category">
+		<option value="">Alle Kategorien</option>
+		@foreach (var categorty in Model.Categories)
+		{
+			<option value="@categorty">@categorty</option>
+		}
+	</select>
+
+	<select asp-for="Sort">
+		<option value="">Keine Sortierung</option>
+		<option value="name">Name</option>
+		<option value="price_asc">Preis ↑</option>
+		<option value="price_desc">Preis ↓</option>
+	</select>
+
+	<button type="submit">Anwenden</button>
+</form>
+<table>
+	<tr><th>Name</th><th>Kategorie</th><th>Preis</th></tr>
+	@foreach (var p in Model.Products)
+	{
+		<tr><td>@p.Name</td><td>@p.Category</td><td>@p.Price €</td></tr>
+	}
+</table>
