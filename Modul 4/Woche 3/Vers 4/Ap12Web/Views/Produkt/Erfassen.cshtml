@@ -6,6 +6,42 @@
 	<title>Produkt erfassen</title>
 </head>
 <body>
+	<form asp-controller="Produkt" asp-action="Speichern" method="post">
+		<div>
+			<label asp-for="Bezeichnung"></label>
+			<input asp-for="Bezeichnung" />
+			<span asp-validation-for="Bezeichnung"></span>
+		</div>
+		<div>
+			<label asp-for="Preis"></label>
+			<input asp-for="Preis" />
+			<span asp-validation-for="Preis"></span>
+		</div>
+		<div>
+			<label asp-for="HerstellerId"></label>
+			<select asp-for="HerstellerId">
+				<option value="">--Bitte auswählen--</option>
+				@foreach(var hersteller in Model.HerstellerList)
+				{
+					if (Model.HerstellerId == hersteller.HerstellerId)
+					{
+						<option selected value="@hersteller.HerstellerId">@hersteller.Name</option>
+					}
+					else
+					{
+						<option value="@hersteller.HerstellerId">@hersteller.Name</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="HerstellerId"></span>
+		</div>
+
+		<input type="submit" value="Senden" />
+	</form> 
+
+
+
+@* 
 	<form method="post" action="/Produkt/Speichern">
 		<div>
 			<label for="Bezeichnung">Bezeichnung</label>
@@ -19,13 +55,11 @@
 		<div>
 			<label for="Hersteller">Hersteller</label>
 			<select name="Hersteller" id="Hersteller">
-				@* <option selected="@(string.IsNullOrEmpty(Model.Hersteller))">Bitte auswählen</option>
-				<option selected="@(Model.Hersteller == "AlpenGold Lebensmittel GmbH")">AlpenGold Lebensmittel GmbH</option>
-				<option selected="@(Model.Hersteller == "Wiener Genussmanufaktur")">Wiener Genussmanufaktur</option>
-				<option selected="@(Model.Hersteller == "Steirische Naturkost KG")">Steirische Naturkost KG</option> *@
 			</select>
 		</div>
 		<input type="submit" value="Senden" />
 	</form>
+ *@
+
 </body>
 </html>

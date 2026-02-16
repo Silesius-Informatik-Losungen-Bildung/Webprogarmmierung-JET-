@@ -6,6 +6,7 @@ namespace Ap12Web.Data
     public class Ap12WebDbContext : DbContext
     {
         public DbSet<Produkt> Produkte { get; set; }
+        public DbSet<Hersteller> Hersteller { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
