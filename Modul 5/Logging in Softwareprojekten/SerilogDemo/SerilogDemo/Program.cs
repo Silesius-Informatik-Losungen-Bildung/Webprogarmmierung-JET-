@@ -10,23 +10,12 @@ namespace SerilogDemo
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Serilog konfigurieren
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .Enrich.FromLogContext()
-                .WriteTo.Console() // Console
-                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day) 
-                .WriteTo.MSSqlServer( // SQL Server
-                    connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
-                    sinkOptions: new MSSqlServerSinkOptions
-                    {
-                        TableName = "Logs",
-                        AutoCreateSqlTable = true
-                    })
-                .CreateLogger();
+            // Serilog aus appsettings.json laden
+            builder.Host.UseSerilog((context, services, configuration) =>
+            {
+                configuration.ReadFrom.Configuration(context.Configuration);
+            });
 
-            builder.Host.UseSerilog(); // Serilog statt Default-Logger
 
 
             // Add services to the container.

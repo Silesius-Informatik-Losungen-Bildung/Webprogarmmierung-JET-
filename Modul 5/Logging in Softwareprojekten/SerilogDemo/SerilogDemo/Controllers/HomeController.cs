@@ -22,7 +22,7 @@ namespace SerilogDemo.Controllers
         public IActionResult OkDemo()
         {
             _logger.LogInformation("Dies ist eine Info-Lognachricht aus MVC");
-            return Content("Alles ok – Nachricht geloggt!");
+             return RedirectToAction("Index");
         }
 
         public IActionResult ErrorDemo()
@@ -34,9 +34,10 @@ namespace SerilogDemo.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Es ist ein Fehler im ErrorDemo passiert");
-                return Content("Fehler wurde geloggt!");
+                return RedirectToAction("Index");
             }
         }
+        
 
         public IActionResult Privacy()
         {
