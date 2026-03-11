@@ -19,10 +19,10 @@ namespace SerilogDemo.Controllers
             return View();
         }
 
-        public IActionResult OkDemo()
+        public IActionResult WarningDemo()
         {
-            _logger.LogInformation("Dies ist eine Info-Lognachricht aus MVC");
-             return RedirectToAction("Index");
+            _logger.LogWarning("Dies ist eine Warnung-Lognachricht aus MVC");
+            return RedirectToAction("Index");
         }
 
         public IActionResult ErrorDemo()
@@ -37,7 +37,7 @@ namespace SerilogDemo.Controllers
                 return RedirectToAction("Index");
             }
         }
-        
+
 
         public IActionResult Privacy()
         {
